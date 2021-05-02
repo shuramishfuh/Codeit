@@ -1,0 +1,11 @@
+
+Usage: ./search <command>
+
+<command>:
+   config         Configures codeit's database information
+
+   crawl, -c      Crawls/Index an offline website
+
+   list, -l       List crawled websites
+
+   delete, -d     Delete a crawled website

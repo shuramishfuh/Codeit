@@ -1,0 +1,369 @@
+/*
+ * This file is part of the localGoogoo project
+ *
+ * Copyright (c) 2017, Sochima Biereagu
+ * Under MIT License
+ */
+
+$image: "../images/localGoogoo.png";
+$MAX_MOBILE_WIDTH: 767px;
+
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+}
+
+html,
+body {
+    height: 100%;
+    font-family: Roboto,HelveticaNeue,Arial,sans-serif !important;
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-search {
+    display: none;
+}
+
+nav {
+    .navbar-brand {
+        margin-top: 6px;
+        margin-right: 20px;
+    }
+
+    form.form-inline {
+        margin: 10px;
+    }
+
+    #search_box {
+        box-shadow: 0 1px 2px #ccc;
+        color: #333;
+
+        &:hover, &:focus {
+            border-color: #ddd;
+            box-shadow: 0 1px 6px #ccc;
+            color: #333;
+        }
+    }
+}
+
+.container-center {
+    height: 185px;
+    text-align: center;
+}
+
+.container-center:before {
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+}
+
+///////////////
+// home page //
+///////////////
+
+@media screen and (max-width: $MAX_MOBILE_WIDTH) {
+    .pc-only {
+        display: none;
+    }
+    .container-center {
+        height: 100px;
+    }
+    div.m div#title {
+        display: none;
+    }
+    div#title-mobile {
+        display: block !important;
+    }
+    button[name=lucky] {
+        display: none;
+    }
+    div.form-container {
+        border: none !important;
+    }
+}
+
+div.home-header {
+    margin-bottom: 14px;
+}
+
+div#title-mobile {
+    display: none;
+}
+
+div.m {
+    display: block;
+    vertical-align: middle;
+
+    div#title {
+        height: 130px;
+
+        background-image: url($image);
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    button.btn.btn-primary.btn-lg {
+        font-size: 14px;
+        text-align: center;
+        cursor: pointer;
+        user-select: none;
+
+        width: 138px;
+        height: 36px;
+        min-width: 54px;
+        line-height: 27px;
+
+        padding: 0 16px;
+        margin: 11px 4px;
+        border: 1px solid #f2f2f2;
+
+        border-color: #fff;
+        background: #f2f2f2;
+        color: #5F6368;
+
+        font-family: arial,sans-serif;
+        
+        @include border-radius(4px);
+        &:hover {
+            box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+            background-image: -webkit-linear-gradient(top,#f8f8f8,#f1f1f1);
+            background-color: #f8f8f8;
+            border: 1px solid #c6c6c6;
+            color: #222;
+        }
+    }
+
+    form {
+        margin-bottom: 90px;
+
+        div#search_buttons {
+            margin-top: 30px;
+        }
+    }
+}
+
+
+div.form-container {
+    $ContainerWidth: 280;
+    $ContainerHeight: 300;
+
+    display: block;
+
+    width: (($ContainerWidth * 2) / 1140) * 100%;
+    height: ($ContainerHeight)*1px;
+    min-width: $ContainerWidth * 1px;
+
+    margin: 40px auto;
+
+    color: #24272a;
+    background: rgba(255, 255, 255, 0.4);
+    border: 2px solid #ccc;
+    padding-top: 20px;
+
+    form.form-indexSite {
+        input, button {
+            margin: 9px 0;
+        }
+
+        width: (($ContainerWidth)-9) * 1px;
+        margin: 10px auto;
+    }
+}
+
+.form-control.box {
+    height: auto;
+    display: block;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    @include border-radius(20px);
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-control.input-lg.home-search {
+    @include border-radius(20px);
+}
+
+.col-md-6.col-md-offset-3 {
+    input {
+        @include border-radius(3px);
+        box-shadow: 0 1px 1px #ccc;
+    }
+
+    .form-control:focus, .form-control:hover {
+        border-color: #ddd;
+        box-shadow: 0 1px 8px #aaa;
+    }
+}
+
+a.index-site-button {
+    margin-top: 12px;
+}
+
+
+////////////////////////////
+// search results styling //
+////////////////////////////
+
+// mobile view
+@media screen and (max-width: $MAX_MOBILE_WIDTH) {
+    #search_box {
+        box-shadow: none !important;
+        &:hover, &:focus {
+            box-shadow:  none !important;
+        }
+    }
+
+    nav {
+        .navbar-header {
+            margin: 0 auto;
+            width: 50%;            
+        }
+        a.navbar-brand {
+            display: block;
+            margin: 0 auto;
+            width: 100%;
+            img {
+                margin: 0 auto;
+            }
+        }
+    }
+
+    div.container.results-page {
+        width: inherit !important;
+        margin-left: 0 !important;
+        padding: 0 5px;
+    }
+    .mobile-search { display: block; }
+    div.add-site { display: none; }
+
+    div.result {
+        width: 98%;
+        margin: 0 auto;
+        margin-bottom: 8px;
+        border: 1px solid #ccc;
+        text-overflow: ellipsis;
+        box-shadow: 0 1px 6px #ccc;
+        @include border-radius(9px);
+    }
+
+    div.result-body {
+        padding: 10px;
+        padding-top: 5px;
+    }
+
+    div.result-header {
+        padding: 10px 10px 0 10px;
+    }
+
+    a.result-click-link {
+        color: #1558D6 !important;
+        display: block;
+    }
+
+}
+
+
+div.Wrp {
+    flex: 1 0 auto;    
+}
+
+div.container.results-page {
+    width: 621px;
+    margin-left: 12.3%;
+}
+
+
+// pc-view
+div.result {
+    padding: 4px;
+    line-height: 20px;
+    margin-bottom: 14px;
+}
+
+
+a.result-click-link {
+    color: #1A0DAB;
+    display: inline-block;
+
+    &:hover {
+        text-decoration: none;
+        span.result-title {
+            text-decoration: underline;
+        }
+    }
+}
+
+a.result-link {
+    color: #1A0DAB;
+    font-size: 17px;
+    display: inline-block;
+    margin-top: 5px;
+
+    &:visited {
+        color: #609;
+    }
+}
+
+span.result-title {
+    display: inline-block;
+    font: 20px arial, sans;
+    margin: 0 0 3px;
+    padding: 4px 0 0;
+}
+
+span.result-content {
+    display: block;
+    overflow-x: hidden;
+    color: #4D5156 !important;
+    b {
+    	color: #5F6368 !important;
+    }
+}
+
+small.result-url {
+    color: #333;
+    display: block;
+    overflow-x: hidden;
+    text-decoration: none;        
+}
+
+small.results-count {
+    color: #888;
+    margin-left: 5px;
+}
+
+div.search-footer {
+    flex-shrink: 0;
+    height: 50px;
+    color: rgba(0,0,0,.54);
+    background-color: rgb(242, 242, 242); 
+    border-top: 1px solid #ddd;
+
+    a {
+        color: #5F6368;
+    }
+
+    div.brand {
+        width: 100px;
+        display: inline-block;
+        border-right: 1px solid #ccc;
+    }
+
+    div.dev {
+        margin-left: 10px;
+        display: inline-block;
+    }
+
+    div.c {
+        margin-top: 5px;
+        margin-left: 14%;
+    }
+}

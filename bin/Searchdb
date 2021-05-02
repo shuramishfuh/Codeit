@@ -1,0 +1,192 @@
+#!/usr/bin/env php
+<?php
+
+/*
+ * This file is part of the codit project
+ *
+ */
+
+// Test user PHP version
+if (version_compare(PHP_VERSION, '7.0.0', '<')) {
+    // oops!
+
+    exit(
+<<<text
+
+Oops!, you seem to be using an older version of PHP,
+ codeit only works on PHP (>= 7)
+
+text
+    );
+}
+
+
+require __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__."/../php/inc/helpers.inc.php";
+
+use League\CLImate\CLImate;
+
+$usage = <<<text
+
+Usage: $argv[0] <command>
+
+<command>:
+   config        Configures codeit' database information
+   crawl, -c     Crawls/Index an offline website
+   list, -l      List crawled websites
+   delete, -d    Delete a crawled website
+
+text;
+
+$climate = new CLImate;
+
+if (isset($argv[1])) {
+    $command = strtolower($argv[1]);
+
+    switch ($command) {
+        case 'config':
+            config();
+            break;
+
+        case 'crawl':
+        case '-c':
+            crawl();
+            break;
+
+        case 'list':
+        case '-l':
+            sites();
+            break;
+
+        case 'delete':
+        case '-d':
+            delete();
+            break;
+
+        default:
+            exit("Invalid Command \n $usage");
+    }
+} else {
+    exit($usage);
+}
+
+
+// config
+function config() {
+    global $climate;
+
+    // create the config file if its not found
+    prepareConfigFile("../config.json");
+
+    // host
+    $host = $climate->input(PHP_EOL.'DB host (e.g localhost): ');
+    $host->defaultTo('localhost');
+
+    // user
+    $user = $climate->input(PHP_EOL.'DB username (e.g root): ');
+    $user->defaultTo('root');
+
+    // password
+    $pass = $climate->password(PHP_EOL.'DB password: ');
+
+    $host = $host->prompt();
+    $user = $user->prompt();
+    $pass = $pass->prompt();
+
+    echo "======================================".PHP_EOL;
+
+    $json = [
+        'DB_HOST' => $host,
+        'DB_USER' => $user,
+        'DB_PASSWORD' => $pass,
+        'DB_NAME' => 'localgoogoo'
+    ];
+    $json = json_encode($json, JSON_PRETTY_PRINT);
+
+    $input = $climate->confirm("\nContinue? ".PHP_EOL.$json.PHP_EOL);
+
+    if ($input->confirmed()) {
+        file_put_contents(__DIR__."/../config.json", $json);
+        echo PHP_EOL."localGoogoo succcessfully configured!".PHP_EOL.PHP_EOL;
+    }
+}
+
+
+// crawl website
+function crawl() {
+    global $argv;
+
+    $sitename = ($argv[2] ?? '');
+    $siteurl = ($argv[3] ?? '');
+
+    $script = __DIR__."/../php/crawl.php";
+
+    passthru("php -f $script $argv[0] \"$sitename\" \"$siteurl\"");
+}
+
+
+// delete website
+function delete() {
+    global $argv, $climate;
+
+    define('included', 1);
+    require_once __DIR__."/../php/inc/setup_database.inc.php";
+    // exposes the mysql connection, $conn
+
+    if (!isset($argv[2])) {
+        $usageText = "\nUSAGE: $argv[0] $argv[1] [website name]".PHP_EOL.PHP_EOL;
+        exit($usageText);
+    }
+    else {
+        $input = $climate->confirm("Delete '$argv[2]'");
+
+        if (!$input->confirmed()) {
+            return;
+        }
+
+        (function($msysql_conn, $website_name) {
+            $name = $msysql_conn -> escape_string($website_name);
+
+            $delete = "DELETE FROM pages WHERE page_website='$name';";
+            $delete .= "DELETE FROM websites WHERE site_name='$name';";
+
+            @$msysql_conn->multi_query($delete);
+
+            echo "Done!";
+        })($conn, $argv[2]);
+    }
+}
+
+
+
+// list crawled websites
+function sites() {
+    global $argv;
+
+    define('included', 1);
+    require_once __DIR__."/../php/inc/setup_database.inc.php";
+    // exposes the mysql connection, $conn
+
+    $websites = $conn->query(
+        <<<sql
+      SELECT site_name, pages_count, site_url, last_index_date, crawl_time FROM websites
+      ORDER BY last_index_date DESC
+    sql
+    );
+
+    $allPagesCount = $conn->query("SELECT COUNT(*) FROM pages")->fetch_row()[0];
+
+    echo "$allPagesCount Crawled pages\n\n";
+    $sites = 0;
+    while ($row = $websites->fetch_row()) {
+        $site = $row[0];
+        $pages = $row[1];
+        $url = $row[2];
+        $s = "$site ($pages pages) \n $url \n\n";
+        echo $s;
+        $sites += 1;
+    }
+
+    echo "$sites sites crawled\n";
+}
+

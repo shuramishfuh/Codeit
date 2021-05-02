@@ -1,0 +1,7 @@
+/.sass-cache
+/assets/css/styles.min.css.map
+/vendor
+
+.php_cs.cache
+log.txt
+

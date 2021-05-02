@@ -1,0 +1,30 @@
+{
+    "name": "Codeit/Codeit",
+    "description": "offline Search Engine.",
+    "type": "application",
+    "license": "MIT",
+    "keywords": [
+        "search",
+        "engine",
+        "local",
+        "team",
+        "developer",
+        "google",
+        "Codeit",
+        "git"
+    ],
+    "authors": [ 
+        {
+            "name": "RFS",
+            "email": "agamatimtim@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.0.0",
+        "ext-mysqli": "*",
+        "league/climate": "^3.2"
+    },
+  "bin": [ "bin/searchdb" ],
+    "version": "1.0.0"
+}

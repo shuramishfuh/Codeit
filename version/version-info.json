@@ -1,0 +1,10 @@
+{
+  "version_number": 1,
+  "sem_ver": "v1.0.0",
+
+  "changes": [
+    "use Golang package update to search from the command line. .",
+    "Bug fixes"
+  ]
+}
+
