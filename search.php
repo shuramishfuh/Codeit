@@ -92,15 +92,6 @@ if (is_array($results)) {
           </form>
         </div>
 
-        <!-- update alert -->
-        <div style="width: 27%; position: absolute; display: none; right: 0; top: 10px;"
-            class="pc-only alert alert-info alert-dismissible version" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          New version available! <span id='version'></span>
-          <ul class='update-list'> </ul>
-          <a href="http://github.com/kodejuice/localGoogoo"> [Go to Repo] </a>
-        </div>
-      </nav>
 
       <div class="container results-page">
 
@@ -173,15 +164,7 @@ if (is_array($results)) {
     </div>
 
     <div class="search-footer"> 
-      <div class="c">
-        <div class="brand">
-          <a href="https://github.com/kodejuice/localGoogoo">LocalGoogoo </a>
-        </div>
 
-        <div class="dev">
-        (c) <?php echo date('Y') ?>, <a href="https://twitter.com/kodejuice"> Sochima Biereagu </a>
-        </div>
-      </div>
     </div>
 
     <script>
@@ -235,6 +218,16 @@ if (is_array($results)) {
           $input.val(query.replace(/\s+/g, ' '));
         });
       });
+
+
+
+      // autocomplete
+      $(function()
+       {
+          $( "#search_box" ).autocomplete({
+           source: 'autocomplete.php'
+             });
+        });
     </script>
   </body>
 </html>

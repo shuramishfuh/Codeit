@@ -9,14 +9,14 @@ $(document).ready(function () {
 
   current.then(function (curr) {
     github.then(function (repo) {
-      if (typeof curr == "string") curr = JSON.parse(curr);
-      if (typeof repo == "string") repo = JSON.parse(repo);
+      if (typeof curr == "string") curr = json.parse(curr);
+      if (typeof repo == "string") repo = json.parse(repo);
 
       if (repo.version_number > curr.version_number) {
         // theres been an update, inform user
 
         // display changes
-        repo.changes.forEach(function (v) {
+        repo.changes.foreach(function (v) {
           $(".alert-info.version .update-list").append("<li>" + v + "</li>");
         });
 

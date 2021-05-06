@@ -9,8 +9,11 @@
     <title>Codit Search</title>
 
     <link rel="icon" href="./assets/images/favicon.ico">
+    <link href="./assets/css/jquery-ui.min.css" rel="stylesheet">
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="./assets/css/styles.min.css" rel="stylesheet">
+
+     
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -68,10 +71,10 @@
         ga('send', 'pageview');
     </script>
 
-    <script src="./assets/js/libs/jquery.min.js"></script>
+   <script src="./assets/js/libs/jquery.min.js"></script>
     <script src="./assets/js/libs/bootstrap.min.js"></script>
     <script src="./assets/js/libs/jquery.hotkeys.js"></script>
-    <script src="./version/version-tracker.js"></script>
+    <script src="./assets/js/libs/jquery-ui.min.js"></script>
 
     <script>
       $(function(){
@@ -117,9 +120,14 @@
             }
           }
         });
-
-
       });
+
+      $(function () {
+            $("#search_box").autocomplete({
+                source: ["cool", "Hi", "dffd "]
+            });
+        });
+
     </script>
 
   </body>
