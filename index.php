@@ -37,7 +37,7 @@
                <div class="card-body">
                  <form action="./search.php">
                 <div class="form-group">
-                  <input name="q" type="search" placeholder="aye aye captain" class="form-control input-lg home-search" id="search_box">
+                  <input name="q" type="search" placeholder="aye aye captain" class="form-control input-lg home-search" id="search_box" spellcheck="true">
                 </div>
 
                 <div id="search_buttons">

@@ -13,13 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	$result =mysqli_query($conn,$q);
 	if (mysqli_num_rows($result)) {
 	     while($row=mysqli_fetch_assoc($result)){
-		 echo '<a href ="#" class = "list-group list-group-item-action border p-2">'
+		 echo '<a href ="#" class = "list-group list-group-item-action border p-2"">'
 					.$row['page_title'].'<a/> ';
 		 }
 	}
-	else {
-	           echo '<p class= "list-group list-group-item"> record not found <p/>';
-          }
+	
 
 
      }
