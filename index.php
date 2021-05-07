@@ -9,8 +9,7 @@
     <title>Codit Search</title>
 
     <link rel="icon" href="./assets/images/favicon.ico">
-    <link href="./assets/css/jquery-ui.min.css" rel="stylesheet">
-    <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link href="./assets/css/styles.min.css" rel="stylesheet">
 
      
@@ -24,14 +23,6 @@
   <body>
 
     <div class="container">
-
-      <!-- update alert -->
-      <div style="width: 40%; position: absolute; display: none;" class="pc-only alert alert-info alert-dismissible version" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        New version available! <span id='version'></span>
-        <ul class='update-list'> </ul>
-      </div>
-
       <div class="container-center">
         <div class="m">
           <div class="home-header">
@@ -40,9 +31,11 @@
             </div>
           </div>
 
-          <div class="row">
+          <div class="row d-flex justify-content-center ">
             <div class="col-md-6 col-md-offset-3">
-              <form action="./search.php">
+             <div class=" mt-5 w-100 ">
+               <div class="card-body">
+                 <form action="./search.php">
                 <div class="form-group">
                   <input name="q" type="search" placeholder="aye aye captain" class="form-control input-lg home-search" id="search_box">
                 </div>
@@ -50,8 +43,15 @@
                 <div id="search_buttons">
                   <button type="submit" class="btn btn-primary btn-lg home-btn btn-info btn-p">Search</button>
                   <button type="submit" class="btn  btn-lg btn btn-warning home-btn" name="lucky" title="Use Ctrl+Enter" value="true">Narrow search</button>
+                   </div>
+                 </form>
                 </div>
-              </form>
+                 <div class="card-body">
+                    <div class="list-group list-group-item-action" id="content">
+
+                    </div>
+                </div>
+               </div>
 
             </div><!-- /.col-md-6 col-md-offset-3 -->
           </div> <!-- /.row -->
@@ -71,10 +71,11 @@
         ga('send', 'pageview');
     </script>
 
+
    <script src="./assets/js/libs/jquery.min.js"></script>
-    <script src="./assets/js/libs/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
     <script src="./assets/js/libs/jquery.hotkeys.js"></script>
-    <script src="./assets/js/libs/jquery-ui.min.js"></script>
+    <script src="./assets/js/autocomplete.js"></script>
 
     <script>
       $(function(){
@@ -121,12 +122,6 @@
           }
         });
       });
-
-      $(function () {
-            $("#search_box").autocomplete({
-                source: ["cool", "Hi", "dffd "]
-            });
-        });
 
     </script>
 
