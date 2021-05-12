@@ -1,10 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\php",
-    "\\php\\inc",
-    "\\php\\search"
+    "\\assets",
+    "\\assets\\css"
   ],
-  "SelectedNode": "\\php\\search\\api.search.php",
+  "SelectedNode": "\\autocompleteApi.php",
   "PreviewInSolutionExplorer": false
 }

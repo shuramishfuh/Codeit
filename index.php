@@ -26,9 +26,10 @@
       <div class="container-center">
         <div class="m">
           <div class="home-header">
-            
+              <a class="navbar-brand" href="index.php">
               <img style="border:none;margin:8px 0" height="56" src="assets/images/Codeit.png" width="220" alt=""/>
-            </div>
+                </a>
+              </div>
           </div>
 
           <div class="row d-flex justify-content-center ">
